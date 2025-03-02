@@ -1,0 +1,42 @@
+<button type="button"
+        onclick="toggleTask({{ task.id }}, this)"
+        class="toggle-button border rounded px-2 py-1 {% if not task.isDone %}text-blue-500 hover:bg-blue-500 
+        hover:text-white{% endif %} text-sm">
+    {% if task.isDone %}
+        <i class="fas fa-check text-green-500"></i>
+    {% else %}
+        Mark as Done
+    {% endif %}
+</button>
+<script>
+    function toggleTask(taskId) {
+        $.ajax({
+            url: `/tasks/${taskId}/toggle`,
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-Requested-With": "XMLHttpRequest"
+            },
+            success: function(response) {
+                const $taskItem = $(`#task-${response.taskId}`);
+                const $taskTitle = $taskItem.find(".task-title");
+                const $button = $taskItem.find(".toggle-button");
+
+                if (response.isDone) {
+                    $taskTitle.addClass("line-through text-gray-500");
+                    $button
+                        .removeClass("text-blue-500 hover:bg-blue-500 hover:text-white")
+                        .html("<i class='fas fa-check text-green-500'></i>");
+                } else {
+                    $taskTitle.removeClass("line-through text-gray-500");
+                    $button
+                        .addClass("text-blue-500 hover:bg-blue-500 hover:text-white")
+                        .html("Mark as Done");
+                }
+            },
+            error: function() {
+                alert("Error updating task status");
+            }
+        });
+    }
+</script>

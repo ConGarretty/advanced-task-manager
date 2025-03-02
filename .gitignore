@@ -1,0 +1,28 @@
+###> symfony/framework-bundle ###
+.env.dev
+.env.test
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+.phpunit.cache/
+###< phpunit/phpunit ###
+###> IDE files ###
+/.idea/
+/.idea/**/*
+/.idea/*.xml
+/.idea/*.iml
+/.idea/vcs.xml
+/.vscode/
+*.sublime-workspace
+*.sublime-project
+*.iml
+.DS_Store
+###< IDE files ###

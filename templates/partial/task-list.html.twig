@@ -1,0 +1,24 @@
+<ul id="task-list" class="bg-white shadow-md rounded-lg p-4">
+    <li class="flex items-center justify-end py-2 border-b">
+        <a href="{{ path("task-index", {
+            "sort": "createdAt",
+            "direction": taskData.sorting.currentField == "createdAt" ? taskData.sorting.nextDirection : "ASC",
+            "page": taskData.pagination.currentPage
+            }) }}" class="text-sm text-gray-600 hover:text-blue-500 flex items-center gap-1">
+            Sort by created at
+            <i class="fas fa-sort-{{ taskData.sorting.currentDirection|lower }}"></i>
+        </a>
+    </li>
+    {% for task in taskData.tasks %}
+        <li id="task-{{ task.id }}" class="flex items-center justify-between py-2 border-b last:border-0">
+            <div class="flex flex-col">
+                <span class="task-title {{ task.isDone ? "line-through text-gray-500" : "" }}">{{ task.title }}</span>
+                <span class="text-xs text-gray-500">Created {{ task.createdAt|date("F j, Y, g:i a") }}</span>
+            </div>
+            <div class="flex gap-2">
+                {% include "/partial/button/update-task-button.html.twig" %}
+                {% include "/partial/button/delete-task-button.html.twig" %}
+            </div>
+        </li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,11 @@
+{{ form_start(form, {"attr": {"class": "mt-4 flex"}}) }}
+    {{ form_widget(form.title) }}
+    {{ form_widget(form.submit) }}
+{{ form_end(form) }}
+{% if form.title.vars.errors|length > 0 %}
+    <div class="mt-2 text-red-500">
+        {% for error in form.title.vars.errors %}
+            {{ error.message }}
+        {% endfor %}
+    </div>
+{% endif %}

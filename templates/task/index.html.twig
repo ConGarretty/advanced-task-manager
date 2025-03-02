@@ -1,0 +1,9 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div class="max-w-lg mx-auto mt-8">
+        <h2 class="text-xl font-bold mb-4">Task List</h2>
+        {% include "/partial/task-list.html.twig" %}
+        {% include "/partial/pagination.html.twig" %}
+        {% include "/partial/task-form.html.twig" %}
+    </div>
+{% endblock %}
