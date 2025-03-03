@@ -96,16 +96,16 @@ class TaskManagerServiceTest extends AbstractApplicationTestCase
      */
     public function testCreateTask(): void
     {
-        $title = "Test Task";
-        $newTask = new Task();
+        $task = (new Task())->setTitle("Test Task");
+        $savedTask = new Task();
         $this->taskManagerProcessMock->expects($this->once())
             ->method("saveTask")
-            ->willReturnCallback(function (Task $task) use ($newTask, $title) {
-                $this->assertEquals($title, $task->getTitle());
-                return $newTask;
+            ->willReturnCallback(function (Task $submittedTask) use ($savedTask, $task) {
+                $this->assertEquals($task->getTitle(), $submittedTask->getTitle());
+                return $savedTask;
             });
 
-        $this->assertSame($newTask, $this->taskManagerService->createTask($title));
+        $this->assertSame($savedTask, $this->taskManagerService->createTask($task));
     }
 
     /**

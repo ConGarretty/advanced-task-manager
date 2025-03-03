@@ -42,12 +42,12 @@ class TaskManagerService
     }
 
     /**
-     * @param string $title
+     * @param Task $task
      * @return Task
      */
-    public function createTask(string $title): Task
+    public function createTask(Task $task): Task
     {
-        return $this->getTaskManagerProcess()->saveTask((new Task())->setTitle($title));
+        return $this->getTaskManagerProcess()->saveTask($task);
     }
 
     /**
