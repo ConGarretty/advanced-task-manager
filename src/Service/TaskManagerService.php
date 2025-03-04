@@ -56,7 +56,10 @@ class TaskManagerService
      */
     public function toggleTask(Task $task): Task
     {
-        return $this->getTaskManagerProcess()->saveTask($task->setIsDone(!$task->getIsDone()));
+        return $this->getTaskManagerProcess()->saveTask($task
+            ->setIsDone(!$task->getIsDone())
+            ->setUpdatedAt(new DateTime())
+        );
     }
 
     /**
